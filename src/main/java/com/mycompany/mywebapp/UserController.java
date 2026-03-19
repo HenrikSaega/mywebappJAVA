@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import com.mycompany.mywebapp.user.User;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class UserController {
     }
 
     @PostMapping("/users/save")
-    public String saveUser(User user){
+    public String saveUser(User user, RedirectAttributes ra){
         service.save(user);
-        
+        ra.addFlashAttribute("message", "The user has been saved successfully!");
         return "redirect:/users";
     }
 }
