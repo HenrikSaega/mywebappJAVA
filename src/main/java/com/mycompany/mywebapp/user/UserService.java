@@ -24,6 +24,14 @@ public class UserService {
         if(result.isPresent()) {
             return result.get();
         }
-        throw new UserNotFoundExeption("Could not find any userd with ID" + id);
+        throw new UserNotFoundExeption("Could not find any user with ID" + id);
+    }
+
+    public void delete(Integer id) throws UserNotFoundExeption {
+        Long count = repo.countById(id);
+        if (count == null || count == 0) {
+            throw new UserNotFoundExeption("Couldn't find user with such ID - " + id);
+        }
+        repo.deleteById(id);
     }
 }
